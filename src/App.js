@@ -4,8 +4,16 @@ import "./App.css";
 
 function App() {
   const [cart, setCart] = useState([]);
+  const[orderPlaced, setOrderPlaced]=useState(false);
+  const[blinkId,setBlinkId]=useState(null);
+  const [finalBill, setFinalBill] = useState(0);
+  const [orderedItems, setOrderedItems] = useState([]);
 
   const addToCart = (item) => {
+    setBlinkId(item.id);
+    setTimeout(()=>{
+      setBlinkId(null);
+    },500)
     const exist = cart.find((x) => x.id === item.id);
 
     if (exist) {
@@ -47,6 +55,18 @@ function App() {
     0
   );
 
+  const placeOrder = () => {
+    if (cart.length === 0) {
+      alert("Please add items to cart first!");
+      return;
+    }
+
+    setFinalBill(total);
+    setOrderedItems(cart);
+    setOrderPlaced(true);
+    setCart([]);
+  };
+
   const renderSection = (category, type) => {
     return data
       .filter(
@@ -70,9 +90,18 @@ function App() {
 
           <p>₹{item.price}</p>
 
-          <button onClick={() => addToCart(item)}>
+          {!orderPlaced && (
+            <button
+              className={
+                blinkId === item.id
+                  ? "add-btn blink"
+                  : "add-btn"
+            }
+            onClick={() => addToCart(item)}
+          >
             Add To Cart
           </button>
+        )}
         </div>
       ));
   };
@@ -121,9 +150,28 @@ function App() {
       </div>
 
       <div className="cart">
-        <h2>🛒 Cart ({totalItems} Items)</h2>
+        <h2>
+          🛒 Cart (
+          {orderPlaced
+            ? orderedItems.reduce(
+                (sum, item) => sum + item.qty,
+                0
+              )
+            : totalItems}
+          {" "}Items)
+        </h2>
 
-        {cart.length === 0 ? (
+        {orderPlaced ? (
+          <div>
+            <h3>Ordered Items:</h3>
+
+            {orderedItems.map((item) => (
+              <p key={item.id}>
+                {item.title} × {item.qty}
+              </p>
+            ))}
+          </div>
+        ) : cart.length === 0 ? (
           <p>Your cart is empty</p>
         ) : (
           cart.map((item) => (
@@ -145,11 +193,21 @@ function App() {
           ))
         )}
 
-        <h2>Total Bill: ₹{total}</h2>
+        <h2>
+          Total Bill: ₹{orderPlaced ? finalBill : total}
+        </h2>
 
-        <button className="order-btn">
-          Place Order
-        </button>
+        {!orderPlaced && (
+          <button className="order-btn" onClick={placeOrder}>
+            Place Order
+          </button>
+        )}
+
+        {orderPlaced && (
+          <h3 className="success">
+            ✅ Order Confirmed! Thank You For Ordering.
+          </h3>
+        )}
       </div>
     </div>
   );

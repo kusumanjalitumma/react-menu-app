@@ -1,17 +1,14 @@
-/* Background */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
 }
 
-/* Main Container */
 .container {
   padding: 30px;
   text-align: center;
 }
 
-/* Main Heading */
 h1 {
   color: white;
   font-size: 3rem;
@@ -19,7 +16,6 @@ h1 {
   text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
 }
 
-/* Category Headings */
 h2 {
   color: #2c3e50;
   margin-top: 40px;
@@ -29,13 +25,11 @@ h2 {
   border-radius: 25px;
 }
 
-/* Veg / Non-Veg Headings */
 h3 {
   color: #34495e;
   margin-top: 20px;
 }
 
-/* Menu Grid */
 .menu-grid {
   display: flex;
   justify-content: center;
@@ -44,7 +38,6 @@ h3 {
   margin-top: 15px;
 }
 
-/* Food Card */
 .card {
   width: 240px;
   background: white;
@@ -58,27 +51,23 @@ h3 {
   transform: translateY(-8px) scale(1.03);
 }
 
-/* Image */
 .card img {
   width: 100%;
   height: 160px;
   object-fit: cover;
 }
 
-/* Food Name */
 .card h3 {
   color: #e74c3c;
   margin: 10px 0;
 }
 
-/* Price */
 .card p {
   font-size: 18px;
   font-weight: bold;
   color: #27ae60;
 }
 
-/* Add To Cart Button */
 .card button {
   margin-bottom: 15px;
   padding: 10px 18px;
@@ -95,7 +84,6 @@ h3 {
   background: #ee5253;
 }
 
-/* Cart Section */
 .cart {
   margin-top: 40px;
   background: white;
@@ -107,18 +95,15 @@ h3 {
   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
-/* Cart Title */
 .cart h2 {
   background: none;
   color: #2c3e50;
 }
 
-/* Cart Items */
 .cart p {
   font-size: 17px;
 }
 
-/* Quantity Buttons */
 .cart button {
   padding: 6px 12px;
   margin: 5px;
@@ -134,8 +119,66 @@ h3 {
   background: #2980b9;
 }
 
-/* Total Price */
 .cart h2:last-child {
   color: #27ae60;
   font-size: 28px;
+}
+
+.added {
+  animation: blink 0.5s;
+}
+
+.success {
+  color: green;
+  margin-top: 15px;
+  font-weight: bold;
+  animation: blinkText 1s infinite;
+}
+
+@keyframes blinkText {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.add-btn {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.blink {
+  animation: blinkEffect 0.5s;
+}
+
+@keyframes blinkEffect {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.success {
+  color: green;
+  font-weight: bold;
+  margin-top: 15px;
+  animation: successBlink 1s infinite;
+}
+
+@keyframes successBlink {
+  50% {
+    opacity: 0.5;
+  }
 }
